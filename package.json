@@ -11,7 +11,12 @@
   },
   "dependencies": {
     "@nuxt/eslint": "^1.13.0",
+    "@nuxt/ui": "^4.4.0",
+    "@pinia/nuxt": "^0.11.3",
+    "nanoid": "^5.1.6",
     "nuxt": "^4.3.0",
+    "pinia": "^3.0.4",
+    "tailwindcss": "^4.1.18",
     "vue": "^3.5.27",
     "vue-router": "^4.6.4"
   },

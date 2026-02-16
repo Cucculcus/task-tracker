@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+@theme {
+  --color-severity-hard: oklch(55.652% 0.20051 26.736);
+  --color-severity-middle: oklch(89.774% 0.17519 96.602);
+  --color-severity-easy: oklch(78.91% 0.24073 144.15);
+}

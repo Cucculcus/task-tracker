@@ -1,10 +1,11 @@
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <UApp>
+    <UMain>
+      <NuxtLayout>
+        <NuxtPage></NuxtPage>
+      </NuxtLayout>
+    </UMain>
+  </UApp>
 </template>
 
-<script setup>
-const a = 7
-</script>
+<script setup></script>
