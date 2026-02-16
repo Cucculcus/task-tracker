@@ -2,10 +2,14 @@ import { nanoid } from 'nanoid'
 import type { severity, Task } from '~/types/task.model'
 
 export const useTaskStore = defineStore('tasks', () => {
-  const tasks = ref<Record<string, Task>>({})
+  const tasks = ref<Map<string, Task>>(new Map())
 
   const getTask = (id: string): Task | undefined => {
-    return tasks.value[id]
+    return tasks.value.get(id)
+  }
+
+  function deleteTask(id: string) {
+    tasks.value.delete(id)
   }
 
   function editTask(
@@ -19,7 +23,7 @@ export const useTaskStore = defineStore('tasks', () => {
       subtasks?: string[]
     },
   ): void {
-    const edited = tasks.value[id]
+    const edited = tasks.value.get(id)
     if (edited) {
       edited.id = id
       edited.severity = editedParams.severity
@@ -53,11 +57,13 @@ export const useTaskStore = defineStore('tasks', () => {
       plannedCompletionDate: newTaskParams.plannedCompletionDate ?? undefined,
     }
 
-    return (tasks.value[id] = newTask)
+    tasks.value.set(id, newTask)
+    return newTask
   }
+
   function addSubTask(parentId: string, childId: string) {
     if (getTask(parentId) && getTask(childId)) {
-      tasks.value[parentId]?.subtasks?.push(childId)
+      tasks.value.get(parentId)?.subtasks?.push(childId)
     } else throw new Error('DevError one from tasks not exist in addSubTask')
   }
 
@@ -87,6 +93,7 @@ export const useTaskStore = defineStore('tasks', () => {
     editTask,
     createTask,
     addSubTask,
+    deleteTask,
     id1: task1.id,
     id2: task2.id,
     id3: task3.id,

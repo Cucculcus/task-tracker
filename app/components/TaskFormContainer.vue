@@ -115,9 +115,9 @@ const onSubmit = (params: {
     }
 
     toast.add({
-      title: 'Задача успешно создана',
+     title: 'Задача успешно создана',
       description: `Создана задача ${created.title}`,
-      icon: 'weui:done-filled',
+      icon: 'weui:done-filled', 
     })
   }
 }

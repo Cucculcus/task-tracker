@@ -12,14 +12,22 @@
 
 <script setup lang="ts">
 const store = useDeskStore()
+const toast = useToast()
 const title = ref('')
-
 const isError = ref(false)
+
+const emit = defineEmits(['created'])
 
 const onClick = () => {
   if (title.value.trim()) {
-    store.createDesk(title.value)
+    const createdId = store.createDesk(title.value)
+    toast.add({
+      title: 'Стол успешно создан',
+      description: `Стол ${title.value} создан`,
+      icon: 'weui:done-filled',
+    })
     isError.value = false
+    emit('created', createdId)
   } else {
     isError.value = true
   }

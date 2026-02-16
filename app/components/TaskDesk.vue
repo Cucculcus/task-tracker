@@ -7,7 +7,7 @@
     "
   >
     <TaskCardContainer
-      v-for="taskId in desk.tasks"
+      v-for="taskId in tasks"
       :key="taskId"
       :task-id="taskId"
     />
@@ -19,7 +19,10 @@ import type { Desk } from '~/types'
 import { useUserConfigStore } from '#imports'
 
 const userConfigStore = useUserConfigStore()
-defineProps<{
+const tasks = computed(() => {
+  return props.desk.tasks
+})
+const props = defineProps<{
   desk: Desk
 }>()
 </script>

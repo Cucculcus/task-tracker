@@ -23,7 +23,7 @@
         </div></UButton
       >
       <UButton
-        v-for="desk in deskStore.desks"
+        v-for="desk in deskStore.getDesks"
         :key="desk.id"
         @click="onClick(desk, 'onBoardButton')"
       >

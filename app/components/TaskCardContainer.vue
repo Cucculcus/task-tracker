@@ -1,5 +1,10 @@
 <template>
-  <TaskCard :task :position @on-edit-button="onEdit">
+  <TaskCard
+    :task="task ?? undefined"
+    :position
+    @on-edit-button="onEdit"
+    @on-delete-button="onDelete"
+  >
     <template #sub-tasks>
       <div v-if="isHasSubtasks" class="truncate flex flex-col gap-1">
         <SubTaskCard
@@ -9,7 +14,7 @@
         ></SubTaskCard>
       </div>
       <div v-else class="flex flex-row gap-3 items-center h-full">
-        <div class="h-full">{{ task.text }}</div>
+        <div class="h-full">{{ task?.text }}</div>
       </div>
     </template>
   </TaskCard>
@@ -32,7 +37,7 @@ const position = computed(() => {
 })
 
 const subTasks = computed(() => {
-  return task.value.subtasks?.map((id: string) => taskStore.getTask(id))
+  return task.value?.subtasks?.map((id: string) => taskStore.getTask(id))
 })
 
 const isHasSubtasks = computed(() => {
@@ -42,9 +47,15 @@ const isHasSubtasks = computed(() => {
   return false
 })
 
-const openEditTaskModal = inject<() => void>('onEditTask')!
+const taskCardEvents: {
+  onEditTask: (task: Task) => void
+  onDeleteTask: (taskId: string) => void
+} = inject('taskCardEvents')!
 
-const onEdit = (taskToEdit: Task) => {
-  openEditTaskModal(taskToEdit)
+const onEdit = (task: Task) => {
+  taskCardEvents.onEditTask(task)
+}
+const onDelete = (taskId: string) => {
+  taskCardEvents.onDeleteTask(taskId)
 }
 </script>

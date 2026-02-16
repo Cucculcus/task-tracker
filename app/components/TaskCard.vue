@@ -1,6 +1,6 @@
 <template>
   <UCard
-    color="primary"
+    variant="outline"
     class="w-[240px]"
     :class="userConfigStore.isMobile ? '' : 'absolute'"
     :style="
@@ -12,16 +12,16 @@
     <template #header>
       <div class="flex items-center">
         <div class="bg-bg flex items-center gap-2 flex-1">
-          <div class="truncate max-w-2/3">{{ task.title }}</div>
+          <div class="truncate max-w-2/3">{{ task?.title ?? '1' }}</div>
           <TaskSeverityIcon
-            :is-completed="task.isCompleted"
-            :severity="task.severity"
+            :is-completed="task?.isCompleted"
+            :severity="task?.severity"
           />
         </div>
         <div class="flex-none flex gap-2">
           <UIcon name="weui:setting-outlined" class="size-6" @click="onEdit" />
           <UIcon name="weui:done-outlined" class="size-6" />
-          <UIcon name="weui:delete-outlined" class="size-6" />
+          <UIcon name="weui:delete-outlined" class="size-6" @click="onDelete" />
         </div>
       </div>
     </template>
@@ -32,7 +32,7 @@
 
     <template #footer>
       <div>Прогресс: 777%</div>
-      <div>Истекает: {{ task.plannedCompletionDate }}</div>
+      <div>Истекает: {{ task?.plannedCompletionDate }}</div>
     </template>
   </UCard>
 </template>
@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import type { Position, Task } from '~/types/task.model'
 
-const emit = defineEmits(['onEditButton'])
+const emit = defineEmits(['onEditButton', 'onDeleteButton'])
 
 const props = defineProps<{
   task: Task
@@ -50,5 +50,8 @@ const userConfigStore = useUserConfigStore()
 
 const onEdit = () => {
   emit('onEditButton', props.task)
+}
+const onDelete = () => {
+  emit('onDeleteButton', props.task.id)
 }
 </script>
