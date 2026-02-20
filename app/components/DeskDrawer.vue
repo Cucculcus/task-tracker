@@ -18,7 +18,9 @@
     <template #body>
       <UButton @click="onClick(null, 'onCreateButton')"
         ><div class="flex w-full gap-4">
-          <div class="w-3/4 flex justify-start">Создать новый стол</div>
+          <div class="w-3/4 flex justify-start">
+            {{ $t('createDeskWindow.createButtonText') }}
+          </div>
           <div class="w-1/4 flex justify-end">+</div>
         </div></UButton
       >

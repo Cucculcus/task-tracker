@@ -1,11 +1,5 @@
 <template>
-  <UContainer
-    :class="
-      userConfigStore.isMobile
-        ? 'static flex flex-col gap-4  items-center'
-        : 'relative'
-    "
-  >
+  <UContainer :class="'w-full h-full flex items-center flex-col gap-6 py-2'">
     <TaskCardContainer
       v-for="taskId in tasks"
       :key="taskId"
@@ -16,9 +10,6 @@
 
 <script setup lang="ts">
 import type { Desk } from '~/types'
-import { useUserConfigStore } from '#imports'
-
-const userConfigStore = useUserConfigStore()
 const tasks = computed(() => {
   return props.desk.tasks
 })

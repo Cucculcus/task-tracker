@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import type { severity, Task } from '~/types/task.model'
 
-export const useTaskStore = defineStore('tasks', () => {
+export const useTaskStore = defineStore('taskStore', () => {
   const tasks = ref<Map<string, Task>>(new Map())
 
   const getTask = (id: string): Task | undefined => {
@@ -86,6 +86,8 @@ export const useTaskStore = defineStore('tasks', () => {
     plannedCompletionDate: new Date(),
   })
   addSubTask(task2.id, task3.id)
+
+  console.log(task1.id)
 
   return {
     tasks,

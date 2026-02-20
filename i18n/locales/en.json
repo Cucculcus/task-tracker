@@ -1,0 +1,64 @@
+{
+  "createDeskWindow": {
+    "createButtonText": "Create New Desk",
+    "createDeskForm": {
+      "title": "Create New Desk",
+      "placeholder": "Enter desk name",
+      "button": "Create",
+      "toast": {
+        "title": "Desk Created",
+        "description": "The new desk has been successfully created"
+      }
+    }
+  },
+  "createTaskWindow": {
+    "title": "Edit Task",
+    "currentTask": "Current Task",
+    "taskTitle": {
+      "title": "Task Title",
+      "placeholder": "Enter task title"
+    },
+    "priority": {
+      "title": "Select Task Priority",
+      "value": {
+        "hard": "High",
+        "middle": "Medium",
+        "easy": "Low"
+      }
+    },
+    "date": {
+      "title": "Select Due Date and Time"
+    },
+    "taskDescription": {
+      "title": "Task Description",
+      "placeholder": "Enter a description or create subtasks"
+    },
+    "subtasks": {
+      "title": "Subtasks",
+      "createButton": "Create Subtask"
+    },
+    "createButtonText": {
+      "create": "Create",
+      "edit": "Edit"
+    },
+    "toasts": {
+      "create": {
+        "title": "Task Created",
+        "description": "The new task has been successfully created"
+      },
+      "edit": {
+        "title": "Task Updated",
+        "description": "The task has been successfully edited"
+      }
+    }
+  },
+  "deleteToast": {
+    "title": "Confirm Deletion",
+    "buttonText": "Delete",
+    "onDeleteTitle": "Task Deleted"
+  },
+  "taskCard": {
+    "progress": "Progress",
+    "expired": "Expires"
+  }
+}

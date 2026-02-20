@@ -26,6 +26,7 @@ import type { BreadcrumbItem } from '@nuxt/ui'
 import type { severity, Task } from '~/types/task.model'
 import TaskForm from './TaskForm.vue'
 
+const { t } = useI18n()
 const toast = useToast()
 const taskEditorStore = useTaskEditorStore()
 const taskStore = useTaskStore()
@@ -35,7 +36,7 @@ const breadcrumps = computed<Array<BreadcrumbItem>>(() => {
   taskEditorStore.tasksInEdit.forEach((item) => {
     if (item) {
       items.push({ label: `${item.title}` })
-    } else items.push({ label: 'Текущий' })
+    } else items.push({ label: `${t('createTaskWindow.currentTask')}` })
   })
   return items
 })
@@ -83,8 +84,8 @@ const onSubmit = (params: {
         plannedCompletionDate: params.plannedCompletionDate,
       })
       toast.add({
-        title: 'Задача успешно отредактирована',
-        description: `Задача ${exists.title} отредактирована`,
+        title: `${t('createTaskWindow.toasts.edit.title')}`,
+        description: `${t('createTaskWindow.toasts.edit.description')}`,
         icon: 'weui:refresh-filled',
       })
     }
@@ -115,9 +116,9 @@ const onSubmit = (params: {
     }
 
     toast.add({
-     title: 'Задача успешно создана',
-      description: `Создана задача ${created.title}`,
-      icon: 'weui:done-filled', 
+      title: `${t('createTaskWindow.toasts.create.title')}`,
+      description: `${t('createTaskWindow.toasts.create.description')}`,
+      icon: 'weui:done-filled',
     })
   }
 }

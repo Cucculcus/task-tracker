@@ -4,13 +4,17 @@
       v-model="title"
       :color="isError ? 'error' : 'neutral'"
       highlight
-      placeholder="Введите имя для стола"
+      :placeholder="$t('createDeskWindow.createDeskForm.placeholder')"
     />
-    <UButton label="Создать" @click="onClick"></UButton>
+    <UButton
+      :label="$t('createDeskWindow.createDeskForm.button')"
+      @click="onClick"
+    ></UButton>
   </div>
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 const store = useDeskStore()
 const toast = useToast()
 const title = ref('')
@@ -22,8 +26,8 @@ const onClick = () => {
   if (title.value.trim()) {
     const createdId = store.createDesk(title.value)
     toast.add({
-      title: 'Стол успешно создан',
-      description: `Стол ${title.value} создан`,
+      title: `${t('createDeskWindow.createDeskForm.toast.title')}`,
+      description: `${t('createDeskWindow.createDeskForm.toast.description')}`,
       icon: 'weui:done-filled',
     })
     isError.value = false

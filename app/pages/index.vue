@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-screen min-w-screen">
     <div class="w-full bg-amber-300 min-h-[48px]">HEADER</div>
     <div class="w-full flex items-center mb-2">
       <div class="flex flex-none gap-1">
@@ -20,17 +20,18 @@
 
       <div class="flex-1 flex justify-end">{{ currentDesk?.title }}</div>
     </div>
-    <div v-if="currentDesk">
-      <UModal
-        v-model:open="isCreateDeskModalOpen"
-        fullscreen
-        title="Окно создания стола"
-      >
-        <template #body>
-          <CreateDeskForm @created="onDeskCreated" />
-        </template>
-      </UModal>
 
+    <UModal
+      v-model:open="isCreateDeskModalOpen"
+      fullscreen
+      :title="$t('createDeskWindow.createDeskForm.title')"
+    >
+      <template #body>
+        <CreateDeskForm @created="onDeskCreated" />
+      </template>
+    </UModal>
+
+    <div v-if="currentDesk" class="w-full h-full">
       <TaskEditModal
         v-if="isEditTaskModalOpen"
         v-model:is-open="isEditTaskModalOpen"

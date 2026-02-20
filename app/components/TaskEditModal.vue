@@ -4,7 +4,7 @@
     :dismissible="isDismissible"
     @update:open="(newValue) => (isModalOpen = newValue)"
     fullscreen
-    title="Окно редактирования задачи"
+    :title="$t('createTaskWindow.title')"
   >
     <template #body>
       <TaskFormContainer

@@ -1,7 +1,6 @@
 <template>
   <TaskCard
     :task="task ?? undefined"
-    :position
     @on-edit-button="onEdit"
     @on-delete-button="onDelete"
   >
@@ -26,14 +25,9 @@ import type { Task } from '~/types'
 const props = defineProps<{ taskId: string }>()
 
 const taskStore = useTaskStore()
-const positionStore = useTaskPositionStore()
 
 const task = computed(() => {
   return taskStore.getTask(props.taskId)
-})
-
-const position = computed(() => {
-  return positionStore.getPosition(props.taskId)
 })
 
 const subTasks = computed(() => {
@@ -59,3 +53,5 @@ const onDelete = (taskId: string) => {
   taskCardEvents.onDeleteTask(taskId)
 }
 </script>
+
+<style></style>

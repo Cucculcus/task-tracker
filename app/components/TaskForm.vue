@@ -1,17 +1,17 @@
 <template>
   <div class="flex flex-col gap-4 max-w-full">
     <slot name="breadcrumps"></slot>
-    <UFormField label="Заголовок задачи">
+    <UFormField :label="$t('createTaskWindow.taskTitle.title')">
       <UInput
         v-model="title"
         :color="formErrors.titleError ? 'error' : 'neutral'"
         highlight
         class="w-2/3"
-        placeholder="Введите заголовок задачи"
+        :placeholder="$t('createTaskWindow.taskTitle.placeholder')"
       />
     </UFormField>
 
-    <UFormField label="Выберите приоритет задачи">
+    <UFormField :label="$t('createTaskWindow.priority.title')">
       <div class="flex items-center gap-3">
         <USelect
           v-model="severityChoice"
@@ -24,7 +24,7 @@
       </div>
     </UFormField>
 
-    <UFormField label="Выберите дату и время завешения">
+    <UFormField :label="$t('createTaskWindow.date.title')">
       <div class="grid grid-cols-2 gap-2">
         <UInputDate
           v-model="plannedCompletionCalendarDate"
@@ -39,17 +39,20 @@
       </div>
     </UFormField>
 
-    <UFormField label="Описание задачи">
+    <UFormField :label="$t('createTaskWindow.taskDescription.title')">
       <UTextarea
         v-model="text"
         :color="formErrors.emptyContentError ? 'error' : 'neutral'"
         highlight
-        placeholder="Введите описание задачи или создайте для нее подзадачи"
+        :placeholder="$t('createTaskWindow.taskDescription.placeholder')"
         class="w-2/3"
       />
     </UFormField>
 
-    <UFormField v-if="task?.subtasks?.length > 0" label="Список подзадач">
+    <UFormField
+      :label="$t('createTaskWindow.subtasks.title')"
+      v-if="task?.subtasks?.length > 0"
+    >
       <div class="flex flex-col gap-2">
         <slot name="subtasks"></slot>
       </div>
@@ -60,7 +63,7 @@
       :ui="{
         base: 'justify-center',
       }"
-      label="Создать подзадачу"
+      :label="$t('createTaskWindow.subtasks.createButton')"
       color="neutral"
       variant="subtle"
       class="w-2/3"
@@ -80,7 +83,11 @@
           plannedCompletionDate,
         })
       "
-      >{{ task ? 'Изменить' : 'Создать' }}</UButton
+      >{{
+        task
+          ? `${$t('createTaskWindow.createButtonText.edit')}`
+          : `${$t('createTaskWindow.createButtonText.create')}`
+      }}</UButton
     >
   </div>
 </template>
@@ -89,6 +96,7 @@
 import type { Task } from '~/types'
 import type { severity } from '~/types/task.model'
 
+const { t } = useI18n()
 const emit = defineEmits(['submit', 'onCreateSubtask'])
 
 const props = defineProps<{
@@ -118,9 +126,9 @@ const formErrors = ref({
 
 const title = ref(props.task?.title ?? '')
 const severityItems = ref([
-  { label: 'hard', value: 'hard' },
-  { label: 'middle', value: 'middle' },
-  { label: 'easy', value: 'easy' },
+  { label: `${t('createTaskWindow.priority.value.hard')}`, value: 'hard' },
+  { label: `${t('createTaskWindow.priority.value.middle')}`, value: 'middle' },
+  { label: `${t('createTaskWindow.priority.value.easy')}`, value: 'easy' },
 ])
 const severityChoice = ref<severity>(props.task?.severity ?? 'easy')
 

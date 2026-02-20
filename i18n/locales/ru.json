@@ -1,0 +1,64 @@
+{
+  "createDeskWindow": {
+    "createButtonText": "Создать новый стол",
+    "createDeskForm": {
+      "title": "Создание нового стола",
+      "placeholder": "Введите название стола",
+      "button": "Создать",
+      "toast": {
+        "title": "Стол создан",
+        "description": "Новый стол успешно создан"
+      }
+    }
+  },
+  "createTaskWindow": {
+    "title": "Редактирование задачи",
+    "currentTask": "Текущая задача",
+    "taskTitle": {
+      "title": "Заголовок задачи",
+      "placeholder": "Введите заголовок задачи"
+    },
+    "priority": {
+      "title": "Выберите приоритет задачи",
+      "value": {
+        "hard": "Очень высокий",
+        "middle": "Средний",
+        "easy": "Низкий"
+      }
+    },
+    "date": {
+      "title": "Выберите дату и время завершения"
+    },
+    "taskDescription": {
+      "title": "Описание задачи",
+      "placeholder": "Введите описание задачи или создайте подзадачи"
+    },
+    "subtasks": {
+      "title": "Подзадачи",
+      "createButton": "Создать подзадачу"
+    },
+    "createButtonText": {
+      "create": "Создать",
+      "edit": "Изменить"
+    },
+    "toasts": {
+      "create": {
+        "title": "Задача создана",
+        "description": "Новая задача успешно создана"
+      },
+      "edit": {
+        "title": "Задача обновлена",
+        "description": "Задача успешно отредактирована"
+      }
+    }
+  },
+  "deleteToast": {
+    "title": "Подтвердите удаление",
+    "buttonText": "Удалить",
+    "onDeleteTitle": "Задача удалена"
+  },
+  "taskCard": {
+    "progress": "Прогресс",
+    "expired": "Истекает"
+  }
+}

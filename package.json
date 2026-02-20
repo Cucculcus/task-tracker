@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxt/eslint": "^1.13.0",
     "@nuxt/ui": "^4.4.0",
+    "@nuxtjs/i18n": "^10.2.3",
     "@pinia/nuxt": "^0.11.3",
     "nanoid": "^5.1.6",
     "nuxt": "^4.3.0",

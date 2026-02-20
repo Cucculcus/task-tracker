@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import { defineStore } from 'pinia'
 import type { Desk } from '~/types'
 
-export const useDeskStore = defineStore('desks', () => {
+export const useDeskStore = defineStore('deskStore', () => {
   const taskStore = useTaskStore()
   const mockDeskId = nanoid()
 

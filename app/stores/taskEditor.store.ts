@@ -1,6 +1,6 @@
 import type { Task } from '~/types'
 
-export const useTaskEditorStore = defineStore('taskEditor', () => {
+export const useTaskEditorStore = defineStore('taskEditorStore', () => {
   const tasksInEdit = ref<Task[]>([])
 
   const getLastInEdit = (): Task | undefined => {

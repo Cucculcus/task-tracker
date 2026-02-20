@@ -1,5 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
+import i18nConfig from './i18n/i18n.config'
+export default {
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   app: {
@@ -9,6 +9,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@pinia/nuxt'],
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@pinia/nuxt', '@nuxtjs/i18n'],
   css: ['~/assets/css/main.css'],
-})
+  i18n: i18nConfig,
+}
