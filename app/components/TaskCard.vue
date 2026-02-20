@@ -31,9 +31,9 @@
 
     <template #footer>
       <div class="flex flex-col justify-center p-1 px-4">
-        <div>{{ $t('taskCard.expired') }}: 777%</div>
+        <div>{{ $t('taskCard.progress') }}: 777%</div>
         <div class="flex gap-1">
-          <div>{{ $t('taskCard.progress') }}:</div>
+          <div>{{ $t('taskCard.expired') }}:</div>
           <div>{{ d(task.plannedCompletionDate!, 'short') }}</div>
         </div>
       </div>

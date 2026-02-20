@@ -46,6 +46,8 @@
 <script setup lang="ts">
 import type { Desk, Task } from '~/types'
 
+const { t } = useI18n()
+
 const taskEditorStore = useTaskEditorStore()
 const deskManager = useDeskManagerStore()
 const deskStore = useDeskStore()
@@ -86,11 +88,11 @@ const onCreateTask = () => {
 }
 const onDeleteTask = (taskId: string) => {
   toast.add({
-    title: 'Подтвердите удаление',
+    title: `${t('deleteToast.title')}`,
     icon: 'weui:delete-on-filled',
     actions: [
       {
-        label: 'Удалить',
+        label: `${t('deleteToast.buttonText')}`,
         color: 'primary',
 
         onClick: () => onDeleteTaskConfirm(taskId),
@@ -100,7 +102,7 @@ const onDeleteTask = (taskId: string) => {
 }
 const onDeleteTaskConfirm = (taskId: string) => {
   toast.add({
-    title: 'Задача успешно удалена',
+    title: `${t('deleteToast.onDeleteTitle')}`,
     icon: 'weui:delete-filled',
   })
   deskManager.deleteTask(taskId, currentDesk.value.id)
