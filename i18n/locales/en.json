@@ -49,6 +49,20 @@
       "edit": {
         "title": "Task Updated",
         "description": "The task has been successfully edited"
+      },
+      "error": {
+        "titleError": {
+          "title": "Please enter a title"
+        },
+        "emptyDate": {
+          "title": "Please select a date"
+        },
+        "uncorrectDate": {
+          "title": "End date and time cannot be earlier than the current time"
+        },
+        "emptyContent": {
+          "title": "Please provide task content or subtasks"
+        }
       }
     }
   },

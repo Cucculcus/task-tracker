@@ -4,6 +4,7 @@
     :task
     @submit="onSubmit"
     @on-create-subtask="taskEditorStore.addTaskInEdit(undefined)"
+    @form-error="onFormError"
   >
     <template #breadcrumps>
       <UBreadcrumb :items="breadcrumps" />
@@ -121,5 +122,10 @@ const onSubmit = (params: {
       icon: 'weui:done-filled',
     })
   }
+}
+const onFormError = (error: string) => {
+  toast.add({
+    title: error,
+  })
 }
 </script>

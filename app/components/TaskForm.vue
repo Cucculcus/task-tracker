@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4 max-w-full">
+  <div class="flex flex-col gap-4 max-w-full sm:max-w-2/3">
     <slot name="breadcrumps"></slot>
     <UFormField :label="$t('createTaskWindow.taskTitle.title')">
       <UInput
@@ -25,15 +25,25 @@
     </UFormField>
 
     <UFormField :label="$t('createTaskWindow.date.title')">
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-2 gap-2 sm:">
         <UInputDate
           v-model="plannedCompletionCalendarDate"
-          :color="formErrors.plannedCompletionDateError ? 'error' : 'neutral'"
+          :color="
+            formErrors.emptyPlannedCompletionDateField ||
+            formErrors.uncorrectDate
+              ? 'error'
+              : 'neutral'
+          "
           highlight
         />
         <UInputTime
           v-model="plannedCompletionCalendarTime"
-          :color="formErrors.plannedCompletionDateError ? 'error' : 'neutral'"
+          :color="
+            formErrors.emptyPlannedCompletionDateField ||
+            formErrors.uncorrectDate
+              ? 'error'
+              : 'neutral'
+          "
           highlight
         />
       </div>
@@ -75,14 +85,7 @@
       :ui="{
         base: 'justify-center',
       }"
-      @click="
-        $emit('submit', {
-          title,
-          severity: severityChoice,
-          text,
-          plannedCompletionDate,
-        })
-      "
+      @click="onSubmitClick"
       >{{
         task
           ? `${$t('createTaskWindow.createButtonText.edit')}`
@@ -97,31 +100,40 @@ import type { Task } from '~/types'
 import type { severity } from '~/types/task.model'
 
 const { t } = useI18n()
-const emit = defineEmits(['submit', 'onCreateSubtask'])
+const emit = defineEmits(['submit', 'onCreateSubtask', 'formError'])
 
 const props = defineProps<{
   task?: Task
 }>()
 
-const formErrors = ref({
-  titleError: computed(() => {
-    if (!title.value) {
-      return true
-    }
-    return false
-  }),
-  plannedCompletionDateError: computed(() => {
-    if (!plannedCompletionDate.value) {
-      return true
-    }
-    return false
-  }),
-  emptyContentError: computed(() => {
-    if (!text.value && !props.task?.subtasks) {
-      return true
-    }
-    return false
-  }),
+const formErrors = computed(() => {
+  return {
+    titleError: title.value
+      ? ''
+      : t('createTaskWindow.toasts.error.titleError.title'),
+
+    emptyPlannedCompletionDateField: plannedCompletionDate.value
+      ? ''
+      : t('createTaskWindow.toasts.error.emptyDate.title'),
+
+    uncorrectDate:
+      plannedCompletionDate.value > new Date()
+        ? ''
+        : t('createTaskWindow.toasts.error.uncorrectDate.title'),
+
+    emptyContentError:
+      text.value || props.task?.subtasks?.length > 0
+        ? ''
+        : t('createTaskWindow.toasts.error.emptyContent.title'),
+  }
+})
+
+const firstError = computed(
+  () => Object.values(formErrors.value).find(Boolean) ?? null,
+)
+
+const hasError = computed<boolean>(() => {
+  return !!firstError.value
 })
 
 const title = ref(props.task?.title ?? '')
@@ -153,4 +165,17 @@ const plannedCompletionDate = computed(() => {
   }
   return null
 })
+
+const onSubmitClick = () => {
+  if (hasError.value) {
+    emit('formError', firstError.value)
+  } else {
+    emit('submit', {
+      title,
+      severity: severityChoice,
+      text,
+      plannedCompletionDate,
+    })
+  }
+}
 </script>
