@@ -3,7 +3,7 @@
     <div class="truncate">{{ task.title }}</div>
     <div class="flex items-center justify-end gap-6">
       <div>100%</div>
-      <TaskSeverityIcon
+      <TaskSeverityIcon 
         :is-completed="task.isCompleted"
         :severity="task.severity"
       />

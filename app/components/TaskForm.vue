@@ -1,15 +1,17 @@
 <template>
-  <div class="grid grid-cols-1 min-w-full min-h-full gap-y-3">
-    <div class="justify-self-start">
+  <div
+    class="grid grid-cols-1 pt-12 min-w-full h-3/4 sm:h-full lg:h-9/10 gap-y-3 relative"
+  >
+    <div class="justify-self-start absolute">
       <slot name="breadcrumps"></slot>
     </div>
 
     <UFormField
       :label="$t('createTaskWindow.taskTitle.title')"
       :ui="{
-        root: 'justify-self-center sm:justify-self-start w-full',
+        root: 'w-full justify-self-center sm:justify-self-start lg:w-1/2',
         label: 'w-full flex justify-center sm:text-lg sm:block',
-        container: 'flex justify-center items-center w-full sm:block',
+        container: 'flex justify-center items-center w-full sm:block ',
       }"
     >
       <UInput
@@ -17,36 +19,30 @@
         :color="formErrors.titleError ? 'error' : 'neutral'"
         highlight
         :placeholder="$t('createTaskWindow.taskTitle.placeholder')"
-        :ui="{ base: 'sm:text-lg sm:w-2/3', root: 'sm:w-full w-2/3' }"
+        :ui="{ base: 'sm:text-lg', root: 'w-2/3 lg:w-full' }"
       />
     </UFormField>
 
     <UFormField
       :label="$t('createTaskWindow.priority.title')"
       :ui="{
-        root: 'justify-self-center sm:justify-self-start w-full',
-        label: 'sm:text-lg flex justify-center items-center w-full sm:block',
-        container: 'flex justify-center sm:block',
+        root: 'justify-self-center sm:justify-self-start w-2/3 sm:w-full',
+        label: 'flex justify-center items-center w-full sm:block sm:text-lg',
+        container:
+          'grid grid-cols-5 gap-x-3 items-center sm:grid-cols-24 sm:justify-start lg:grid-cols-4 ',
       }"
     >
-      <div class="w-2/3 sm:w-full flex gap-3 items-center">
-        <USelect
-          v-model="severityChoice"
-          highlight
-          :color="'neutral'"
-          :items="severityItems"
-          :ui="{
-            base: 'flex-1 sm:max-w-2/3',
-            value: 'sm:text-lg',
-          }"
-        ></USelect>
-        <TaskSeverityIcon
-          :severity="severityChoice"
-          class="flex-none"
-          :height="24"
-          :width="24"
-        />
-      </div>
+      <USelect
+        v-model="severityChoice"
+        highlight
+        :color="'neutral'"
+        :items="severityItems"
+        :ui="{
+          base: 'col-span-4 sm:col-span-16 lg:col-span-2',
+          value: 'sm:text-lg',
+        }"
+      ></USelect>
+      <TaskSeverityIcon :severity="severityChoice" :height="24" :width="24" />
     </UFormField>
 
     <UFormField
@@ -54,48 +50,43 @@
       class="justify-self-center sm:justify-self-start w-full"
       :ui="{
         label: 'flex w-full justify-center sm:block sm:text-lg',
+        root: 'sm:justify-items-start justify-items-center ',
+        container: 'w-2/3 grid grid-cols-1 gap-2 sm:gap-6 lg:w-1/2',
       }"
     >
-      <div
-        class="grid grid-cols-1 justify-items-center sm:justify-items-start gap-2 sm:gap-6"
-      >
-        <UInputDate
-          v-model="plannedCompletionCalendarDate"
-          :color="
-            formErrors.emptyPlannedCompletionDateField ||
-            formErrors.uncorrectDate
-              ? 'error'
-              : 'neutral'
-          "
-          highlight
-          :ui="{
-            base: 'sm:text-lg w-2/3 py-0.5 sm:gap-2 min-h-8 sm:min-h-10',
-            segment: 'sm:whitespace-nowrap ',
-          }"
-        />
-        <UInputTime
-          v-model="plannedCompletionCalendarTime"
-          :color="
-            formErrors.emptyPlannedCompletionDateField ||
-            formErrors.uncorrectDate
-              ? 'error'
-              : 'neutral'
-          "
-          highlight
-          :ui="{ base: 'sm:text-lg w-2/3' }"
-        />
-      </div>
+      <UInputDate
+        v-model="plannedCompletionCalendarDate"
+        :color="
+          formErrors.emptyPlannedCompletionDateField || formErrors.uncorrectDate
+            ? 'error'
+            : 'neutral'
+        "
+        highlight
+        :ui="{
+          base: 'w-full min-h-8 py-0.5 sm:gap-2 sm:min-h-10',
+          segment: 'sm:whitespace-nowrap sm:text-lg',
+        }"
+      />
+      <UInputTime
+        v-model="plannedCompletionCalendarTime"
+        :color="
+          formErrors.emptyPlannedCompletionDateField || formErrors.uncorrectDate
+            ? 'error'
+            : 'neutral'
+        "
+        highlight
+        :ui="{ base: 'w-full', segment: 'sm:text-lg ' }"
+      />
     </UFormField>
 
     <UFormField
       :label="$t('createTaskWindow.taskDescription.title')"
       :ui="{
-        root: 'w-5/7 sm:w-2/3 justify-self-center sm:justify-self-start',
-        label: 'sm:text-lg flex justify-center items-center sm:block',
+        root: 'w-5/7 justify-self-center sm:w-2/3 sm:justify-self-start lg:w-1/2',
+        label: 'flex justify-center items-center sm:block sm:text-lg',
       }"
     >
       <UTextarea
-        class="w-full"
         v-model="text"
         :color="formErrors.emptyContentError ? 'error' : 'neutral'"
         highlight
@@ -108,11 +99,11 @@
       v-if="task?.subtasks?.length > 0"
       :label="$t('createTaskWindow.subtasks.title')"
       :ui="{
-        root: 'justify-self-center sm:justify-self-start w-3/4',
+        root: 'justify-self-center w-3/4 sm:justify-self-start lg:absolute lg:right-0 lg:w-1/3 ',
         label:
-          'flex w-full justify-center items-center sm:text-lg sm:justify-start',
+          'flex w-full justify-center items-center sm:text-lg sm:justify-start lg:flex-row-reverse lg:justify-center',
         container:
-          'flex items-center justify-center sm:justify-start sm:text-lg',
+          'flex items-center justify-center sm:justify-start sm:text-lg lg:justify-center',
       }"
     >
       <div class="flex flex-col gap-2">
@@ -120,7 +111,10 @@
       </div>
     </UFormField>
 
-    <div class="grid grid-cols-1 gap-y-2 lg:grid-cols-2 lg:gap-y-0 lg:w-2/3">
+    <div
+      class="grid grid-cols-1 gap-y-2 lg:gap-y-0 lg:w-1/2"
+      :class="{ 'lg:grid-cols-2 ': task }"
+    >
       <UButton
         v-if="task"
         :ui="{
@@ -134,7 +128,9 @@
 
       <UButton
         :ui="{
-          base: 'w-3/4 sm:text-lg justify-center justify-self-center sm:justify-self-start lg:justify-self-end',
+          base:
+            'w-3/4 sm:text-lg justify-center justify-self-center sm:justify-self-start lg:justify-self-end ' +
+            (task ? 'lg:justify-self-start' : 'lg:justify-self-start lg:w-1/2 sm:w-2/3'),
         }"
         @click="onSubmitClick"
         >{{
