@@ -109,8 +109,10 @@
       :label="$t('createTaskWindow.subtasks.title')"
       :ui="{
         root: 'justify-self-center sm:justify-self-start w-3/4',
-        label: 'flex w-full justify-center items-center sm:text-lg',
-        container: 'flex items-center justify-center sm:text-lg',
+        label:
+          'flex w-full justify-center items-center sm:text-lg sm:justify-start',
+        container:
+          'flex items-center justify-center sm:justify-start sm:text-lg',
       }"
     >
       <div class="flex flex-col gap-2">
@@ -118,25 +120,21 @@
       </div>
     </UFormField>
 
-    <div
-      class="grid grid-cols-1 gap-y-2 lg:grid-cols-2 lg:gap-y-0 lg:max-w-5/8"
-    >
+    <div class="grid grid-cols-1 gap-y-2 lg:grid-cols-2 lg:gap-y-0 lg:w-2/3">
       <UButton
         v-if="task"
         :ui="{
-          base: 'justify-center',
+          base: 'justify-center lg:min-h-20 w-3/4 justify-self-center sm:text-lg sm:justify-self-start ',
         }"
         :label="$t('createTaskWindow.subtasks.createButton')"
         color="neutral"
         variant="subtle"
-        class="w-3/4 justify-self-center sm:text-lg sm:justify-self-start"
         @click="emit('onCreateSubtask')"
       />
 
       <UButton
-        class="w-3/4 sm:text-lg"
         :ui="{
-          base: 'justify-center justify-self-center sm:justify-self-start',
+          base: 'w-3/4 sm:text-lg justify-center justify-self-center sm:justify-self-start lg:justify-self-end',
         }"
         @click="onSubmitClick"
         >{{
@@ -150,7 +148,6 @@
 </template>
 
 <script setup lang="ts">
-import type { container, textarea } from '#build/ui'
 import type { Task } from '~/types'
 import type { severity } from '~/types/task.model'
 
