@@ -1,7 +1,7 @@
 <template>
-  <div class="flex">
-    <div class="flex-none max-w-4/7 truncate">{{ task.title }}</div>
-    <div class="flex-1 flex items-center justify-end gap-6">
+  <div class="grid grid-cols-2 w-full">
+    <div class="truncate">{{ task.title }}</div>
+    <div class="flex items-center justify-end gap-6">
       <div>100%</div>
       <TaskSeverityIcon
         :is-completed="task.isCompleted"

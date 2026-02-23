@@ -7,7 +7,7 @@
     @form-error="onFormError"
   >
     <template #breadcrumps>
-      <UBreadcrumb :items="breadcrumps" />
+      <UBreadcrumb :items="breadcrumps" :ui="{ link: 'sm:text-lg' }" />
     </template>
 
     <template v-if="task" #subtasks>
@@ -15,7 +15,7 @@
         v-for="subtask in subtasks"
         :key="subtask?.id"
         :task="subtask"
-        class="max-w-2/3 hover:bg-primary-400 p-1 rounded-xl active:bg-primary-500"
+        class="min-w-4/8 hover:bg-primary-400 p-1 rounded-xl active:bg-primary-500"
         @click="onSubTaskClick(subtask)"
       />
     </template>

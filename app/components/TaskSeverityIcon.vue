@@ -1,5 +1,9 @@
 <template>
-  <div class="rounded-full w-4 h-4" :class="[color]"></div>
+  <div
+    class="rounded-full w-4 h-4"
+    :class="[color]"
+    :style="{ height: `${height}px`, width: `${width}px` }"
+  ></div>
 </template>
 
 <script setup lang="ts">
@@ -21,5 +25,7 @@ const color = computed(() => {
 const props = defineProps<{
   severity: severity
   isCompleted: boolean
+  width?: number
+  height?: number
 }>()
 </script>
