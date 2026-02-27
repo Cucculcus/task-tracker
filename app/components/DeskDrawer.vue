@@ -4,8 +4,9 @@
     inset
     :open="isOpen"
     :ui="{
-      content: 'max-w-dvw',
-      body: 'w-full h-screen max-h-dvh min-h-[75dvh] flex flex-col gap-4',
+      overlay: ' h-screen w-screen flex',
+      content: 'lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2',
+      body: 'flex flex-col gap-4 max-h-dvh min-h-[75dvh]',
     }"
   >
     <UButton
