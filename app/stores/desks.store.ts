@@ -41,6 +41,7 @@ export const useDeskStore = defineStore('deskStore', () => {
       desk.tasks = desk.tasks.filter((id) => id !== taskId)
     }
   }
+
   return {
     desks,
     createDesk,

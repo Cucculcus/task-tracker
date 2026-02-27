@@ -7,5 +7,5 @@ export const useDeskManagerStore = defineStore('deskManagerStore', () => {
     taskStore.deleteTask(taskId)
   }
 
-  return {deleteTask}
+  return { deleteTask }
 })

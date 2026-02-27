@@ -31,14 +31,14 @@
       </template>
     </UModal>
 
-    <div v-if="currentDesk" class="w-full h-full">
+    <div v-if="currentDeskId" class="w-full h-full">
       <TaskEditModal
         v-if="isEditTaskModalOpen"
         v-model:is-open="isEditTaskModalOpen"
         :desk-id="currentDeskId"
       />
 
-      <TaskDesk :desk="currentDesk" />
+      <TaskDesk :deskId="currentDeskId" />
     </div>
   </div>
 </template>
@@ -64,12 +64,9 @@ const currentDesk = computed<Desk | undefined>(() => {
 })
 
 const onUpdateDesk = (desk: Desk | null) => {
-  console.log('CUR ' + currentDeskId.value)
-  console.log('NEW ' + desk?.id)
   if (currentDeskId.value !== desk?.id) {
     currentDeskId.value = desk?.id
   }
-  console.log('SET ' + currentDeskId.value)
 }
 const onCreateDeskClick = () => {
   isCreateDeskModalOpen.value = true
@@ -105,7 +102,7 @@ const onDeleteTaskConfirm = (taskId: string) => {
     title: `${t('deleteToast.onDeleteTitle')}`,
     icon: 'weui:delete-filled',
   })
-  deskManager.deleteTask(taskId, currentDesk.value.id)
+  deskManager.deleteTask(taskId, currentDeskId.value)
 }
 
 provide('taskCardEvents', {
