@@ -41,6 +41,11 @@ export const useDeskStore = defineStore('deskStore', () => {
       desk.tasks = desk.tasks.filter((id) => id !== taskId)
     }
   }
+  function setTasks(deskId: string, idList: string[]) {
+    const desk = { ...desks.value.get(deskId)! }
+    desk.tasks = idList
+    desks.value.set(deskId, desk)
+  }
 
   return {
     desks,
@@ -50,5 +55,6 @@ export const useDeskStore = defineStore('deskStore', () => {
     addTaskToDesk,
     deleteTaskFromDesk,
     getDesks,
+    setTasks
   }
 })

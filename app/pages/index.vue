@@ -38,7 +38,7 @@
         :desk-id="currentDeskId"
       />
 
-      <TaskDesk :deskId="currentDeskId" />
+      <TaskDesk :deskId="currentDeskId" :key="currentDeskId" />
     </div>
   </div>
 </template>
