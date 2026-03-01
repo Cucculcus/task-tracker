@@ -1,6 +1,7 @@
 export default {
   legacy: 'false',
   defaultLocale: 'en',
+  lazy: true, 
   locales: [
     { code: 'en', name: 'English', file: 'en.json' },
     { code: 'ru', name: 'Russian', file: 'ru.json' },

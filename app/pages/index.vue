@@ -4,6 +4,7 @@
     <div class="w-full flex items-center mb-2">
       <div class="flex flex-none gap-1">
         <DeskDrawer
+          :current-desk-id="currentDeskId"
           class="flex-none"
           @on-board-button="onUpdateDesk"
           @on-create-button="onCreateDeskClick"

@@ -1,6 +1,6 @@
 <template>
   <UCard
-    variant="outline"
+    variant="soft"
     class="w-[240px] h-[300px]"
     :ui="{
       header: 'p-0 sm:px-0 w-full h-1/6',

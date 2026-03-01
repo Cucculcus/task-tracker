@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 pt-12 min-w-full h-3/4 sm:h-full lg:h-9/10 gap-y-3 relative"
+    class="grid grid-cols-1 pt-12 min-w-full h-3/4 lg:h-9/10 gap-y-3 relative"
   >
     <div class="justify-self-start absolute">
       <slot name="breadcrumps"></slot>
@@ -29,7 +29,7 @@
         root: 'justify-self-center sm:justify-self-start w-2/3 sm:w-full',
         label: 'flex justify-center items-center w-full sm:block sm:text-lg',
         container:
-          'grid grid-cols-5 gap-x-3 items-center sm:grid-cols-24 sm:justify-start lg:grid-cols-4 ',
+          'grid grid-cols-5 gap-x-3 items-center sm:grid-cols-3 sm:justify-start sm:gap-x-0 lg:grid-cols-2 ',
       }"
     >
       <USelect
@@ -38,11 +38,13 @@
         :color="'neutral'"
         :items="severityItems"
         :ui="{
-          base: 'col-span-4 sm:col-span-16 lg:col-span-2',
+          base: 'col-span-4 sm:col-span-2 lg:col-span-1',
           value: 'sm:text-lg',
         }"
       ></USelect>
-      <TaskSeverityIcon :severity="severityChoice" :height="24" :width="24" />
+      <div class="sm:pl-3">
+        <TaskSeverityIcon :severity="severityChoice" :height="24" :width="24" />
+      </div>
     </UFormField>
 
     <UFormField
@@ -66,7 +68,23 @@
           base: 'w-full min-h-8 py-0.5 sm:gap-2 sm:min-h-10',
           segment: 'sm:whitespace-nowrap sm:text-lg',
         }"
-      />
+      >
+        <template #trailing>
+          <UPopover>
+            <UButton
+              color="neutral"
+              variant="link"
+              size="sm"
+              icon="i-lucide-calendar"
+              aria-label="Select a date"
+              class="px-0"
+            />
+            <template #content>
+              <UCalendar v-model="plannedCompletionCalendarDate" class="p-2" />
+            </template>
+          </UPopover>
+        </template>
+      </UInputDate>
       <UInputTime
         v-model="plannedCompletionCalendarTime"
         :color="
@@ -99,14 +117,14 @@
       v-if="task?.subtasks?.length > 0"
       :label="$t('createTaskWindow.subtasks.title')"
       :ui="{
-        root: 'justify-self-center w-3/4 sm:justify-self-start lg:absolute lg:right-0 lg:w-1/3 ',
+        root: 'justify-self-center w-3/4 sm:w-2/3 sm:justify-self-start lg:absolute lg:right-0 lg:w-1/3 ',
         label:
           'flex w-full justify-center items-center sm:text-lg sm:justify-start lg:flex-row-reverse lg:justify-center',
         container:
-          'flex items-center justify-center sm:justify-start sm:text-lg lg:justify-center',
+          'flex items-center justify-center sm:justify-start sm:text-lg lg:justify-center lg:w-full',
       }"
     >
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 w-full">
         <slot name="subtasks"></slot>
       </div>
     </UFormField>
@@ -130,7 +148,9 @@
         :ui="{
           base:
             'w-3/4 sm:text-lg justify-center justify-self-center sm:justify-self-start lg:justify-self-end ' +
-            (task ? 'lg:justify-self-start' : 'lg:justify-self-start lg:w-1/2 sm:w-2/3'),
+            (task
+              ? 'lg:justify-self-start'
+              : 'lg:justify-self-start lg:w-1/2 sm:w-2/3'),
         }"
         @click="onSubmitClick"
         >{{

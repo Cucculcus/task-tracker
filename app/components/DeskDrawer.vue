@@ -19,17 +19,18 @@
     <template #body>
       <UButton @click="onClick(null, 'onCreateButton')"
         ><div class="flex w-full gap-4">
-          <div class="w-3/4 flex justify-start items-center text-lg">
+          <div class="w-3/4 flex justify-start items-center sm:text-lg">
             {{ $t('createDeskWindow.createButtonText') }}
           </div>
-          <div class="w-1/4 flex justify-end text-lg">+</div>
+          <div class="w-1/4 flex justify-end sm:text-lg">+</div>
         </div></UButton
       >
       <UButton
         v-for="desk in deskStore.getDesks"
         :key="desk.id"
         @click="onClick(desk, 'onBoardButton')"
-        class="text-lg"
+        class="sm:text-lg"
+        :variant="currentDeskId === desk.id ? 'outline' : 'solid'"
       >
         <div>
           {{ desk.title }}
@@ -41,6 +42,10 @@
 
 <script setup lang="ts">
 import type { Desk } from '~/types'
+
+defineProps<{
+  currentDeskId?: string
+}>()
 
 const isOpen = ref(false)
 const emit = defineEmits(['onBoardButton', 'onCreateButton'])
