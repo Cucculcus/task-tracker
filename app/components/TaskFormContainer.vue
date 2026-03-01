@@ -29,6 +29,11 @@ import TaskForm from './TaskForm.vue'
 
 const { t } = useI18n()
 const toast = useToast()
+
+const toastEditWithDelay = callWithDelay(toast.add, 2000)
+const toastCreateWithDelay = callWithDelay(toast.add, 2000)
+const toastErrorWithDelay = callWithDelay(toast.add, 2000)
+
 const taskEditorStore = useTaskEditorStore()
 const taskStore = useTaskStore()
 const deskStore = useDeskStore()
@@ -84,10 +89,11 @@ const onSubmit = (params: {
         subtasks: task.value?.subtasks,
         plannedCompletionDate: params.plannedCompletionDate,
       })
-      toast.add({
+      toastEditWithDelay({
         title: `${t('createTaskWindow.toasts.edit.title')}`,
         description: `${t('createTaskWindow.toasts.edit.description')}`,
         icon: 'weui:refresh-filled',
+        duration: 2000,
       })
     }
   } else {
@@ -116,16 +122,20 @@ const onSubmit = (params: {
       taskEditorStore.addTaskInEdit(created)
     }
 
-    toast.add({
+    toastEditWithDelay({
       title: `${t('createTaskWindow.toasts.create.title')}`,
       description: `${t('createTaskWindow.toasts.create.description')}`,
       icon: 'weui:done-filled',
+      duration: 2000,
     })
   }
 }
 const onFormError = (error: string) => {
-  toast.add({
+  toastErrorWithDelay({
     title: error,
+    color: 'error',
+    icon: 'weui:report-problem-filled',
+    duration: 2000,
   })
 }
 </script>

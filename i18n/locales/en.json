@@ -6,8 +6,13 @@
       "placeholder": "Enter desk name",
       "button": "Create",
       "toast": {
-        "title": "Desk Created",
-        "description": "The new desk has been successfully created"
+        "add": {
+          "title": "Desk Created",
+          "description": "The new desk has been successfully created"
+        },
+        "error": {
+          "title": "Please fill in the name field"
+        }
       }
     }
   },
@@ -21,7 +26,7 @@
     "priority": {
       "title": "Select Task Priority",
       "value": {
-        "hard": "High",
+        "hard": "Very High",
         "middle": "Medium",
         "easy": "Low"
       }
@@ -52,16 +57,16 @@
       },
       "error": {
         "titleError": {
-          "title": "Please enter a title"
+          "title": "Title field error"
         },
         "emptyDate": {
-          "title": "Please select a date"
+          "title": "Date selection error"
         },
         "uncorrectDate": {
           "title": "End date and time cannot be earlier than the current time"
         },
         "emptyContent": {
-          "title": "Please provide task content or subtasks"
+          "title": "Please provide task description or create subtasks for it"
         }
       }
     }
