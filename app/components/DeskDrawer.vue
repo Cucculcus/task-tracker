@@ -32,7 +32,7 @@
         class="sm:text-lg"
         :variant="currentDeskId === desk.id ? 'outline' : 'solid'"
       >
-        <div>
+        <div class="truncate">
           {{ desk.title }}
         </div>
       </UButton>

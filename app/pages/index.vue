@@ -19,7 +19,11 @@
         />
       </div>
 
-      <div class="flex-1 flex justify-end">{{ currentDesk?.title }}</div>
+      <div class="flex-1 flex justify-end pr-1 min-w-0">
+        <div class="truncate max-w-1/2">
+          {{ currentDesk?.title }}
+        </div>
+      </div>
     </div>
 
     <UModal

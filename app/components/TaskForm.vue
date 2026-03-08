@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 pt-12 min-w-full h-3/4 lg:h-9/10 gap-y-3 relative"
+    class="grid grid-cols-1 pt-12 min-w-full gap-y-3 relative h-3/4 sm:h-2/3 lg:h-2/3"
   >
     <div class="justify-self-start absolute">
       <slot name="breadcrumps"></slot>
@@ -42,8 +42,13 @@
           value: 'sm:text-lg',
         }"
       ></USelect>
-      <div class="sm:pl-3">
-        <TaskSeverityIcon :severity="severityChoice" :height="24" :width="24" />
+      <div class="grid sm:flex sm:pl-3">
+        <TaskSeverityIcon
+          :severity="severityChoice"
+          :height="24"
+          :width="24"
+          class="justify-self-end"
+        />
       </div>
     </UFormField>
 
@@ -109,7 +114,7 @@
         :color="formErrors.emptyContentError ? 'error' : 'neutral'"
         highlight
         :placeholder="$t('createTaskWindow.taskDescription.placeholder')"
-        :ui="{ root: 'w-full', base: 'text-lg' }"
+        :ui="{ root: 'w-full', base: 'sm:text-lg' }"
       />
     </UFormField>
 
@@ -136,21 +141,18 @@
       <UButton
         v-if="task"
         :ui="{
-          base: 'justify-center lg:min-h-20 w-3/4 justify-self-center sm:text-lg sm:justify-self-start ',
+          base: 'justify-center lg:min-h-20 w-3/4 justify-self-center sm:w-2/3 sm:text-lg sm:justify-self-start lg:w-48 lg:h-48 lg:rounded-full ',
         }"
         :label="$t('createTaskWindow.subtasks.createButton')"
         color="neutral"
-        variant="subtle"
+        variant="outline"
         @click="emit('onCreateSubtask')"
       />
 
       <UButton
+        variant="outline"
         :ui="{
-          base:
-            'w-3/4 sm:text-lg justify-center justify-self-center sm:justify-self-start lg:justify-self-end ' +
-            (task
-              ? 'lg:justify-self-start'
-              : 'lg:justify-self-start lg:w-1/2 sm:w-2/3'),
+          base: 'w-3/4 sm:text-lg justify-center justify-self-center sm:w-2/3 sm:justify-self-start lg:h-48 lg:w-48 lg:rounded-full  ',
         }"
         @click="onSubmitClick"
         >{{

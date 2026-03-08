@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-4 sm:max-w-1/2 sm:max-h-1/2 sm:translate-x-1/2 sm:translate-y-1/2"
+    class="flex flex-col gap-4 sm:gap-y-24 sm:max-w-1/2 sm:max-h-1/2 sm:translate-x-1/2 sm:translate-y-1/2"
   >
     <UInput
       v-model="title"
@@ -8,20 +8,26 @@
       highlight
       :placeholder="$t('createDeskWindow.createDeskForm.placeholder')"
       :ui="{
-        base: 'text-center',
+        base: 'text-center max-w-[256px] text-lg sm:max-w-full sm:text-2xl',
+        root: ' sm:max-w-full flex justify-center',
       }"
+      variant="outline"
     />
-    <UButton
-      :ui="{
-        base: 'max-w-[296px] sm:max-w-full sm:min-h-12 justify-center flex',
-      }"
-      :label="$t('createDeskWindow.createDeskForm.button')"
-      @click="onClick"
-    ></UButton>
+    <div class="flex justify-center">
+      <UButton
+        :ui="{
+          base: 'sm:max-w-full w-[256px]  justify-center sm:w-32 sm:h-32 text-lg sm:text-xl sm:rounded-full',
+        }"
+        variant="outline"
+        :label="$t('createDeskWindow.createDeskForm.button')"
+        @click="onClick"
+      ></UButton>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+
 const { t } = useI18n()
 const store = useDeskStore()
 const toast = useToast()
