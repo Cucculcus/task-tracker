@@ -1,5 +1,5 @@
 <template>
-  <UApp>
+  <UApp :locale="locales[locale]">
     <UMain>
       <NuxtLayout>
         <NuxtPage></NuxtPage>
@@ -8,4 +8,7 @@
   </UApp>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import * as locales from '@nuxt/ui/locale'
+const { locale } = useI18n()
+</script>
